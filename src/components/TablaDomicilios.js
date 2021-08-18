@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 export default function TablaDomicilios(props) {
     return(
@@ -16,6 +15,7 @@ export default function TablaDomicilios(props) {
                 {props.domicilios.length > 0 ? (
                     props.domicilios.map((d) => (
                         <tr key={d.id}>
+                            <td>{d.id}</td>
                             <td>{d.nombreSolicitante}</td>
                             <td>{d.estado}</td>
                             <td>
@@ -24,7 +24,7 @@ export default function TablaDomicilios(props) {
                                     className=""
                                     onClick={(ev) => props.detalles(d)}
                                 >
-                                    Detalle
+                                    Detalles
                                 </button>
                                 <button
                                     type="button"
@@ -39,6 +39,13 @@ export default function TablaDomicilios(props) {
                                     onClick={(ev) => props.cerrar(d)}
                                 >
                                     Cerrar
+                                </button>
+                                <button
+                                    type="button"
+                                    className=""
+                                    onClick={(ev) => props.eliminar(d)}
+                                >
+                                    Eliminar
                                 </button>
                             </td>
                         </tr>

@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import ManejadorMensajeros from "../components/ManejadorMensajeros";
 
 export default function Mensajeros() {
-    return(
-        <h1>Pagina de mensajeros</h1>
-    );
+    return <ManejadorMensajeros/>
 }

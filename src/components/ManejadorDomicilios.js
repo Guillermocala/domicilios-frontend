@@ -17,11 +17,13 @@ const ManejadorDomicilios = () => {
         nombreDestinatario: "",
         dirDestinatario: "",
         celDestinatario: "",
-        descripcionPaquete: ""
+        horaDestinatario: "",
+        descripcionPaquete: "",
+        mensajero: null,
+        estado: true
     };
 
     const [domicilioEditar, setDomicilioEditar] = useState(esdatoInicialFormulario);
-    const [modoEdicion, setModoEdicion] = useState(false);
 
     useEffect(()=> {
         recuperaDomicilios();
@@ -49,7 +51,10 @@ const ManejadorDomicilios = () => {
                 nombreDestinatario: response.data.nombreDestinatario,
                 dirDestinatario: response.data.dirDestinatario,
                 celDestinatario: response.data.celDestinatario,
-                descripcionPaquete: response.data.descripcionPaquete              
+                horaDestinatario: "",
+                descripcionPaquete: response.data.descripcionPaquete,
+                mensajero: response.data.mensajero,
+                estado: true
             };
             setEstadoListaDomicilios([...estadoInicialListaDomicilios, nuevoDomicilio]);
             console.log(response.data);
@@ -60,7 +65,6 @@ const ManejadorDomicilios = () => {
     };
 
     const editarDomicilio = (domicilio) => {
-        setModoEdicion(true);
         setDomicilioEditar({
             id: domicilio.id,
             nombreSolicitante: domicilio.nombreSolicitante,
@@ -70,7 +74,8 @@ const ManejadorDomicilios = () => {
             nombreDestinatario: domicilio.nombreDestinatario,
             dirDestinatario: domicilio.dirDestinatario,
             celDestinatario: domicilio.celDestinatario,
-            descripcionPaquete: domicilio.descripcionPaquete
+            descripcionPaquete: domicilio.descripcionPaquete,
+            mensajero: domicilio.mensajero
         });
     };
 
@@ -94,7 +99,7 @@ const ManejadorDomicilios = () => {
     return(
         <div>
             <div>
-                <h2></h2>
+                <h2>Domicilios solicitados</h2>
                 <TablaDomicilios
                     domicilios={estadoListaDomicilios}
                     //detalles={}
@@ -104,18 +109,10 @@ const ManejadorDomicilios = () => {
                 />
             </div>
             <div>
-                {!modoEdicion ? (
-                    <>
-                        <h2>Agregar propietario</h2>
-                        <AgregarDomicilio 
-                            agregar={agregarDomicilio}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <h2>Editar Propietario</h2>
-                    </>
-                )}
+                <h2>Crear domicilio</h2>
+                <AgregarDomicilio 
+                    agregar={agregarDomicilio}
+                />
             </div>
         </div>
     );

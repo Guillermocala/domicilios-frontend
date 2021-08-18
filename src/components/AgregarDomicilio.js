@@ -10,7 +10,10 @@ const AgregarDomicilio = (props) => {
         nombreDestinatario: "",
         dirDestinatario: "",
         celDestinatario: "",
-        descripcionPaquete: ""
+        horaDestinatario: "",
+        descripcionPaquete: "",
+        mensajero: null,
+        estado: true
     }
     const [estadoFormDomicilio, setEstadoFormDomicilio] = useState(estadoInicialForm);
     const gestionCamposForm = (event) => {
@@ -35,6 +38,7 @@ const AgregarDomicilio = (props) => {
                 )
                 return;
                 props.agregar(estadoFormDomicilio);
+                console.log("agrego!");
                 setEstadoFormDomicilio(estadoInicialForm);
             }}
         >
@@ -96,7 +100,7 @@ const AgregarDomicilio = (props) => {
                 />
             </div>
             <div className="from-group">
-                <label>Direccion Solicitante</label>
+                <label>Direccion Destinatario</label>
                 <input
                     id="dirDestinatario"
                     className="form-control"
@@ -130,6 +134,22 @@ const AgregarDomicilio = (props) => {
                     onChange={gestionCamposForm}
                 />
             </div>
+            <div className="from-group">
+                <label>Mensajero</label>
+                <select
+                    id="mensajero"
+                    className="form-control"
+                    name="mensajero"
+                    //{mensajeros.map((mensajero) => (
+                      //  <option value={mensajero.id}>{mensajero.nombre}</option>
+                    //))}
+                >
+                    
+                    <option>mensajero 1</option>
+                    <option>mensajero 2</option>
+                    <option>mensajero 3</option>
+                </select>
+            </div>
             <div className="form-group">
                 <button type="submit" className="btn btn-primary">
                     Agregar
@@ -137,6 +157,5 @@ const AgregarDomicilio = (props) => {
             </div>
         </form>
     );
-
 };
 export default AgregarDomicilio;
