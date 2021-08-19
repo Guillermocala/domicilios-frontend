@@ -10,15 +10,15 @@ export const MensajerosContext = createContext(initialState);
 export const MensajerosContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(MensajerosReducer, initialState);
 
-    function addDomicilio (mensajero) {
+    function addMensajero (mensajero) {
         dispatch({ type: "ADD_MENSAJERO", payload: mensajero});
     }
 
-    function editDomicilio (mensajero) {
+    function editMensajero (mensajero) {
         dispatch({ type: "EDIT_MENSAJERO", payload: mensajero});
     }
 
-    function removeDomicilio (id) {
+    function removeMensajero (id) {
         dispatch({ type: "REMOVE_MENSAJERO", payload: id});
     };
 
@@ -29,9 +29,9 @@ export const MensajerosContextProvider = ({ children }) => {
     return (
         <MensajerosContextProvider.Provider value={
             value={
-                addDomicilio,
-                editDomicilio,
-                removeDomicilio,
+                addMensajero,
+                editMensajero,
+                removeMensajero,
                 setListaMensajeros,
                 ...state
             }

@@ -25,13 +25,12 @@ export default function TablaDomicilios(props) {
                             <td>{m.placa}</td>
                             <td>{m.direccion}</td>
                             <td>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={(e) => props.editar(m)}
-                                >
-                                    Editar
-                                </button>
+                                <form action="http://localhost:3000/mensajeros/editmensajero">
+                                    <button 
+                                        type="submit"
+                                        className="btn btn-secondary"
+                                    >Editar</button>
+                                </form>
                                 <button
                                     type="button"
                                     className="btn btn-secondary"

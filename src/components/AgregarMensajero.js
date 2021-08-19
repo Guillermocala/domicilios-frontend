@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import MensajerosServices from "../services/MensajerosServices";
 
-const AgregarMensajero = (props) => {
+const AgregarMensajero = () => {
     const estadoInicialForm = {
         id: null,
         nombre: "",
@@ -23,6 +24,15 @@ const AgregarMensajero = (props) => {
         console.log(estadoFormMensajero);
     };
 
+    const agregarMensajero = (mensajero) => {
+        MensajerosServices.create(mensajero)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    };
     return(
         <form
             onSubmit={(event) => {
@@ -33,9 +43,9 @@ const AgregarMensajero = (props) => {
                     !estadoFormMensajero.cedula ||
                     !estadoFormMensajero.placa
                 ) {console.log("error en formulario");
-                   // return;
+                   return;
                 }
-                props.agregar(estadoFormMensajero);
+                agregarMensajero(estadoFormMensajero);
                 console.log("agregado");
                 setEstadoFormMensajero(estadoInicialForm);
             }}
@@ -105,6 +115,11 @@ const AgregarMensajero = (props) => {
                 <button type="submit" className="btn btn-primary">
                     Agregar
                 </button>
+                <form action="http://localhost:3000/mensajeros">
+                    <button type="submit" className="btn btn-danger">
+                        Cancelar
+                    </button>
+                </form>
             </div>
         </form>
     );

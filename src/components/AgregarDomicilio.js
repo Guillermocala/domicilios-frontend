@@ -144,7 +144,6 @@ const AgregarDomicilio = (props) => {
                       //  <option value={mensajero.id}>{mensajero.nombre}</option>
                     //))}
                 >
-                    
                     <option>mensajero 1</option>
                     <option>mensajero 2</option>
                     <option>mensajero 3</option>
