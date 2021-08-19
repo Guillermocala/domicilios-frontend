@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function TablaDomicilios(props) {
     return(
@@ -25,12 +26,12 @@ export default function TablaDomicilios(props) {
                             <td>{m.placa}</td>
                             <td>{m.direccion}</td>
                             <td>
-                                <form action="http://localhost:3000/mensajeros/editmensajero">
-                                    <button 
-                                        type="submit"
-                                        className="btn btn-secondary"
-                                    >Editar</button>
-                                </form>
+                                <Link
+                                    to={`/mensajeros/editmensajero/${m.id}`}
+                                    title="editar"
+                                >
+                                    Editar
+                                </Link>
                                 <button
                                     type="button"
                                     className="btn btn-secondary"
