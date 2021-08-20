@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function TablaDomicilios(props) {
-    return(
+    return (
         <table>
             <thead>
                 <tr>
@@ -21,29 +22,36 @@ export default function TablaDomicilios(props) {
                             <td>
                                 <button
                                     type="button"
-                                    className=""
+                                    className="btn btn-primary"
                                     onClick={(ev) => props.detalles(d)}
+                                    disabled
                                 >
                                     Detalles
                                 </button>
-                                <button
-                                    type="button"
-                                    className=""
-                                    onClick={(ev) => props.editar(d)}
+                                <Link
+                                    //to={`/domicilios/editdomicilio/${d.id}`}
+                                    title="editar"
                                 >
-                                    Editar
-                                </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        disabled
+                                    >
+                                        Editar
+                                    </button>
+                                </Link>
                                 <button
                                     type="button"
-                                    className=""
+                                    className="btn btn-primary"
                                     onClick={(ev) => props.cerrar(d)}
+                                    disabled
                                 >
                                     Cerrar
                                 </button>
                                 <button
                                     type="button"
-                                    className=""
-                                    onClick={(ev) => props.eliminar(d)}
+                                    className="btn btn-danger"
+                                    onClick={(ev) => props.eliminar(d.id)}
                                 >
                                     Eliminar
                                 </button>

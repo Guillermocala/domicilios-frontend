@@ -15,7 +15,7 @@ const create = (data) => {
 const update = (id, data) => {
   return http.put(`/mensajeros/${id}`, data);
 };
-//no eliminamos, pero la dejamos por si acaso
+
 const remove = (id) => {
   return http.delete(`/mensajeros/${id}`);
 };

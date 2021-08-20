@@ -1,4 +1,4 @@
-export default function MascotasReducer(state, action) {
+export default function DomiciliosReducer(state, action) {
     switch (action.type) {
         case "ADD_DOMICILIO":
             return {

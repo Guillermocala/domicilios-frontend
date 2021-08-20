@@ -32,14 +32,14 @@ export default function TablaMensajeros(props) {
                                 >
                                     <button
                                         type="button"
-                                        className="btn btn-secondary"
+                                        className="btn btn-primary"
                                     >
                                         Editar
                                     </button>
                                 </Link>
                                 <button
                                     type="button"
-                                    className="btn btn-secondary"
+                                    className="btn btn-danger"
                                     onClick={(e) => props.eliminar(m.id)}
                                 >
                                     Eliminar

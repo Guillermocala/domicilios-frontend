@@ -1,6 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import DomiciliosServices from "../services/DomiciliosServices";
+import { Link } from "react-router-dom";
+import MensajerosServices from "../services/MensajerosServices";
 
-const AgregarDomicilio = (props) => {
+const AgregarDomicilio = () => {
+    const estadoInicialListaMensajeros = [];
+    const [estadoListaMensajeros, setEstadoListaMensajeros] = useState(estadoInicialListaMensajeros);
+    useEffect(() => {
+        recuperaMensajeros();
+    }, []);
+    const recuperaMensajeros = () => {
+        MensajerosServices.getAll()
+            .then(response => {
+                setEstadoListaMensajeros(response.data);
+                {
+                    if (response.data.length === 0) {
+                        window.alert("no mensajeros");
+                        document.getElementById("mensajero").disabled = true;
+                        document.getElementById("creardomicilio").disabled = true;
+                    }
+                    else {
+                        document.getElementById("mensajero").disabled = false;
+                        document.getElementById("creardomicilio").disabled = false;
+                    }
+                }
+            })
+            .catch(e => {
+                window.alert("no mensajeros");
+                document.getElementById("mensajero").disabled = true;
+                document.getElementById("creardomicilio").disabled = true;
+                console.log(e);
+            });
+    }
+
     const estadoInicialForm = {
         id: null,
         nombreSolicitante: "",
@@ -15,18 +47,30 @@ const AgregarDomicilio = (props) => {
         mensajero: null,
         estado: true
     }
-    const [estadoFormDomicilio, setEstadoFormDomicilio] = useState(estadoInicialForm);
+    const [estadoFormDomicilio, setEstadoFormDomicilio
+    ] = useState(estadoInicialForm);
+
     const gestionCamposForm = (event) => {
         const { name, value } = event.target;
         setEstadoFormDomicilio({
             ...estadoFormDomicilio, [name]: value
         });
     };
-    return(
+
+    const agregarDomicilio = (domicilio) => {
+        DomiciliosServices.create(domicilio)
+            .then(response => {
+                window.alert("Domicilio creado!");
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+    return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                if(
+                if (
                     !estadoFormDomicilio.nombreSolicitante ||
                     !estadoFormDomicilio.dirSolicitante ||
                     !estadoFormDomicilio.celSolicitante ||
@@ -35,10 +79,11 @@ const AgregarDomicilio = (props) => {
                     !estadoFormDomicilio.dirDestinatario ||
                     !estadoFormDomicilio.celDestinatario ||
                     !estadoFormDomicilio.descripcionPaquete
-                )
-                return;
-                props.agregar(estadoFormDomicilio);
-                console.log("agrego!");
+                ) {
+                    window.alert("error en formulario, algun campo vacío");
+                    return;
+                }
+                agregarDomicilio(estadoFormDomicilio);
                 setEstadoFormDomicilio(estadoInicialForm);
             }}
         >
@@ -70,8 +115,8 @@ const AgregarDomicilio = (props) => {
                     id="celSolicitante"
                     className="form-control"
                     type="tel"
-                    pattern="[0-9]{10}"
-                    placeholder="1231231234"
+                    pattern="[0-9]{1,8}"
+                    placeholder="12345678"
                     name="celSolicitante"
                     value={estadoFormDomicilio.celSolicitante}
                     onChange={gestionCamposForm}
@@ -116,8 +161,8 @@ const AgregarDomicilio = (props) => {
                     id="celDestinatario"
                     className="form-control"
                     type="tel"
-                    pattern="[0-9]{10}"
-                    placeholder="1231231234"
+                    pattern="[0-9]{1,8}"
+                    placeholder="12345678"
                     name="celDestinatario"
                     value={estadoFormDomicilio.celDestinatario}
                     onChange={gestionCamposForm}
@@ -137,22 +182,32 @@ const AgregarDomicilio = (props) => {
             <div className="from-group">
                 <label>Mensajero</label>
                 <select
-                    id="mensajero"
+                    id="mensajeroSelect"
                     className="form-control"
-                    name="mensajero"
-                    //{mensajeros.map((mensajero) => (
-                      //  <option value={mensajero.id}>{mensajero.nombre}</option>
-                    //))}
+                    name="mensajeroSelect"
                 >
-                    <option>mensajero 1</option>
-                    <option>mensajero 2</option>
-                    <option>mensajero 3</option>
+                    {estadoListaMensajeros.map((mensajero) => (
+                        <option
+                            id="mensajero"
+                            name="mensajero"
+                            value={mensajero}
+                        >
+                            {mensajero.nombre}
+                        </option>))}
                 </select>
             </div>
             <div className="form-group">
-                <button type="submit" className="btn btn-primary">
+                <button id="creardomicilio" type="submit" className="btn btn-primary">
                     Agregar
                 </button>
+                <Link
+                    to={"/domicilios"}
+                    title="domicilios"
+                >
+                    <button className="btn btn-danger">
+                        Cancelar
+                    </button>
+                </Link>
             </div>
         </form>
     );
