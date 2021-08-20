@@ -197,14 +197,7 @@ const AgregarDomicilio = () => {
                         <option
                             id="mensajeroOption"
                             name="mensajeroOption"
-                            value={
-                                m.id,
-                                m.nombre,
-                                m.direccion,
-                                m.cel,
-                                m.cedula,
-                                m.placa
-                            }
+                            value={m.id}
                         >
                             {m.nombre}
                         </option>))}
