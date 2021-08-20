@@ -1,5 +1,5 @@
-# Proyecto final programacion web con Julian Pizarro Grupo n-2
-##integrantes: Guillermo Cala, Efraín Czechura, Juan Gómez
+# Proyecto final programacion web con Julian Pizarro Grupo N-2 
+**Integrantes: Guillermo Cala, Efraín Czechura, Juan Gómez**
 
 # Getting Started with Create React App
 
