@@ -1,3 +1,9 @@
+# Proyecto final programacion web con Julian Pizarro Grupo n-2
+#integrantes:
+#Guillermo Cala
+#Efraín Czechura
+#Juan Gómez
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
