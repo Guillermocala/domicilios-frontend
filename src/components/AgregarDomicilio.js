@@ -16,18 +16,18 @@ const AgregarDomicilio = () => {
                 {
                     if (response.data.length === 0) {
                         window.alert("no mensajeros");
-                        document.getElementById("mensajero").disabled = true;
+                        document.getElementById("mensajeroSelect").disabled = true;
                         document.getElementById("creardomicilio").disabled = true;
                     }
                     else {
-                        document.getElementById("mensajero").disabled = false;
+                        document.getElementById("mensajeroSelect").disabled = false;
                         document.getElementById("creardomicilio").disabled = false;
                     }
                 }
             })
             .catch(e => {
                 window.alert("no mensajeros");
-                document.getElementById("mensajero").disabled = true;
+                document.getElementById("mensajeroSelect").disabled = true;
                 document.getElementById("creardomicilio").disabled = true;
                 console.log(e);
             });
@@ -52,6 +52,7 @@ const AgregarDomicilio = () => {
 
     const gestionCamposForm = (event) => {
         const { name, value } = event.target;
+        console.log("name " + name + " value " + value);
         setEstadoFormDomicilio({
             ...estadoFormDomicilio, [name]: value
         });
@@ -61,6 +62,8 @@ const AgregarDomicilio = () => {
         DomiciliosServices.create(domicilio)
             .then(response => {
                 window.alert("Domicilio creado!");
+                console.log("response: ");
+                console.log(response.data)
             })
             .catch(e => {
                 console.log(e);
@@ -83,6 +86,8 @@ const AgregarDomicilio = () => {
                     window.alert("error en formulario, algun campo vacío");
                     return;
                 }
+                console.log("estado form: ");
+                console.log(estadoFormDomicilio);
                 agregarDomicilio(estadoFormDomicilio);
                 setEstadoFormDomicilio(estadoInicialForm);
             }}
@@ -184,20 +189,33 @@ const AgregarDomicilio = () => {
                 <select
                     id="mensajeroSelect"
                     className="form-control"
-                    name="mensajeroSelect"
+                    name="mensajero"
+                    value={estadoFormDomicilio.mensajero}
+                    onChange={gestionCamposForm}
                 >
-                    {estadoListaMensajeros.map((mensajero) => (
+                    {estadoListaMensajeros.map((m) => (
                         <option
-                            id="mensajero"
-                            name="mensajero"
-                            value={mensajero}
+                            id="mensajeroOption"
+                            name="mensajeroOption"
+                            value={
+                                m.id,
+                                m.nombre,
+                                m.direccion,
+                                m.cel,
+                                m.cedula,
+                                m.placa
+                            }
                         >
-                            {mensajero.nombre}
+                            {m.nombre}
                         </option>))}
                 </select>
             </div>
             <div className="form-group">
-                <button id="creardomicilio" type="submit" className="btn btn-primary">
+                <button
+                    id="creardomicilio"
+                    type="submit"
+                    className="btn btn-primary"
+                >
                     Agregar
                 </button>
                 <Link

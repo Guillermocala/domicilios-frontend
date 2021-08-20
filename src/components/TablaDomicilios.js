@@ -29,13 +29,12 @@ export default function TablaDomicilios(props) {
                                     Detalles
                                 </button>
                                 <Link
-                                    //to={`/domicilios/editdomicilio/${d.id}`}
+                                    to={`/domicilios/editdomicilio/${d.id}`}
                                     title="editar"
                                 >
                                     <button
                                         type="button"
                                         className="btn btn-primary"
-                                        disabled
                                     >
                                         Editar
                                     </button>
