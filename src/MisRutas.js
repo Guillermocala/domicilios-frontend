@@ -16,7 +16,7 @@ export default function MisRutas() {
             
             <Route exact path="/mensajeros" component={Mensajeros} />
             <Route path="/mensajeros/addmensajero" component={AddMensajero} />
-            <Route path="/mensajeros/editmensajero:idMensajero" component={EditMensajero} exact/>
+            <Route path="/mensajeros/editmensajero/:idMensajero" component={EditMensajero}/>
         </Switch>
     );
 }

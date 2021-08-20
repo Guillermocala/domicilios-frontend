@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function TablaDomicilios(props) {
+export default function TablaMensajeros(props) {
     return(
         <table>
             <thead>
@@ -30,7 +30,12 @@ export default function TablaDomicilios(props) {
                                     to={`/mensajeros/editmensajero/${m.id}`}
                                     title="editar"
                                 >
-                                    Editar
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                    >
+                                        Editar
+                                    </button>
                                 </Link>
                                 <button
                                     type="button"
@@ -49,7 +54,5 @@ export default function TablaDomicilios(props) {
                 )}
             </tbody>
         </table>
-
     )
-
 }

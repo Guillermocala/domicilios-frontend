@@ -1,7 +1,10 @@
 import React from "react";
+import EditarMensajero from "../components/EditarMensajero";
 
-export default function EditMensajero() {
+export default function AddMensajero({match}) {
     return(
-        <h2>Editar mensajero</h2>
-    );
+        <EditarMensajero 
+            idMensajero={match.params.idMensajero}
+        />
+    )
 }
