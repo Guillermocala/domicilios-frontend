@@ -2,10 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import DomiciliosServices from "../services/DomiciliosServices";
 import { Link } from "react-router-dom";
 import MensajerosServices from "../services/MensajerosServices";
-import { DomiciliosContext } from "../context/DomiciliosContext";
 
 const AgregarDomicilio = () => {
-    const { addDomicilio } = useContext(DomiciliosContext)
     const estadoInicialListaMensajeros = [];
     const [estadoListaMensajeros, setEstadoListaMensajeros] = useState(estadoInicialListaMensajeros);
     useEffect(() => {
@@ -17,7 +15,7 @@ const AgregarDomicilio = () => {
                 setEstadoListaMensajeros(response.data);
                 {
                     if (response.data.length === 0) {
-                        window.alert("no mensajeros");
+                        window.alert("No hay mensajeros");
                         document.getElementById("mensajeroSelect").disabled = true;
                         document.getElementById("creardomicilio").disabled = true;
                     }
@@ -28,7 +26,7 @@ const AgregarDomicilio = () => {
                 }
             })
             .catch(e => {
-                window.alert("no mensajeros");
+                window.alert("No hay mensajeros");
                 document.getElementById("mensajeroSelect").disabled = true;
                 document.getElementById("creardomicilio").disabled = true;
                 console.log(e);
@@ -54,7 +52,6 @@ const AgregarDomicilio = () => {
 
     const gestionCamposForm = (event) => {
         const { name, value } = event.target;
-        console.log("name " + name + " value " + value);
         setEstadoFormDomicilio({
             ...estadoFormDomicilio, [name]: value
         });
@@ -63,9 +60,7 @@ const AgregarDomicilio = () => {
     const agregarDomicilio = (id, domicilio) => {
         DomiciliosServices.create(id, domicilio)
             .then(response => {
-                addDomicilio(response.data);
                 window.alert("Domicilio creado!");
-                console.log("response: ");
                 console.log(response.data)
             })
             .catch(e => {
@@ -89,8 +84,6 @@ const AgregarDomicilio = () => {
                     window.alert("error en formulario, algun campo vacío");
                     return;
                 }
-                console.log("estado form: " + estadoFormDomicilio);
-                console.log("id mensajero: " + estadoFormDomicilio.mensajero.id);
                 agregarDomicilio(estadoFormDomicilio.mensajero, estadoFormDomicilio);
                 setEstadoFormDomicilio(estadoInicialForm);
             }}

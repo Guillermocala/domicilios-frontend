@@ -29,7 +29,7 @@ export default function TablaDomicilios(props) {
                                     Detalles
                                 </button>
                                 <Link
-                                    to={`/domicilios/editdomicilio/${d.id}`}
+                                    to={"/domicilios/editdomicilio/" + d.id}
                                     title="editar"
                                 >
                                     <button
@@ -42,7 +42,7 @@ export default function TablaDomicilios(props) {
                                 <button
                                     type="button"
                                     className="btn btn-primary"
-                                    onClick={(ev) => props.cerrar(d)}
+                                    onClick={(e) => props.cerrar(d)}
                                     disabled
                                 >
                                     Cerrar
@@ -50,7 +50,7 @@ export default function TablaDomicilios(props) {
                                 <button
                                     type="button"
                                     className="btn btn-danger"
-                                    onClick={(ev) => props.eliminar(d.id)}
+                                    onClick={(e) => props.eliminar(d.id)}
                                 >
                                     Eliminar
                                 </button>

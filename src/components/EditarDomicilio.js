@@ -44,8 +44,8 @@ const EditarDomicilio = (props) => {
         DomiciliosServices.get(id)
             .then(response => {
                 setDomicilioEdit(response.data);
-                console.log("respuesta:");
-                console.log(response.data);
+                console.log("respuesta:" + response.data);
+                console.log("mensajero: " + response.data.mensajero);
             })
             .catch(e => {
                 console.log(e);
