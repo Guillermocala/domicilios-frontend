@@ -44,8 +44,6 @@ const EditarDomicilio = (props) => {
         DomiciliosServices.get(id)
             .then(response => {
                 setDomicilioEdit(response.data);
-                console.log("respuesta:" + response.data);
-                console.log("mensajero: " + response.data.mensajero);
             })
             .catch(e => {
                 console.log(e);
@@ -77,9 +75,12 @@ const EditarDomicilio = (props) => {
                     !hayCambios
                 ) {
                     window.alert("Error en formulario, algun campo vacío o no hay modificaciones");
+                    console.log("respuesta: " + domicilioEdit.nombreSolicitante);
+                console.log("mensajero: " + domicilioEdit.nombreDestinatario);
                     return;
                 }
                 DomiciliosServices.update(props.idDomicilio, domicilioEdit);
+                
                 window.alert("Domicilio Atualizado!");
                 setHayCambios(false);
             }}
@@ -176,27 +177,9 @@ const EditarDomicilio = (props) => {
                     onChange={gestionCamposForm}
                 />
             </div>
-            <div className="from-group">
-                <label>Mensajero</label>
-                <select
-                    id="mensajeroSelect"
-                    className="form-control"
-                    name="mensajeroSelect"
-                >
-                    <option value={domicilioEdit.mensajero} selected></option>
-                    {estadoListaMensajeros.map((mensajero) => (
-                        <option
-                            id="mensajero"
-                            name="mensajero"
-                            value={mensajero}
-                        >
-                            {mensajero.nombre}
-                        </option>))}
-                </select>
-            </div>
             <div className="form-group">
                 <button id="creardomicilio" type="submit" className="btn btn-primary">
-                    Agregar
+                    Actualizar
                 </button>
                 <Link
                     to={"/domicilios"}

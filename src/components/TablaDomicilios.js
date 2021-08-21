@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ModalDetalles from "../components/Modal";
 
 export default function TablaDomicilios(props) {
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const closeModal = () => setMostrarModal(false);
+    const openModal = () => setMostrarModal(true);
+
     return (
         <table>
             <thead>
@@ -18,13 +23,17 @@ export default function TablaDomicilios(props) {
                         <tr key={d.id}>
                             <td>{d.id}</td>
                             <td>{d.nombreSolicitante}</td>
-                            <td>{d.estado}</td>
+                            <td>{props.estado(d.estado)}</td>
                             <td>
+                                <ModalDetalles
+                                    show={mostrarModal}
+                                    closeModal={closeModal}
+                                    domicilio={d}
+                                />
                                 <button
                                     type="button"
                                     className="btn btn-primary"
-                                    onClick={(ev) => props.detalles(d)}
-                                    disabled
+                                    onClick={openModal}
                                 >
                                     Detalles
                                 </button>
@@ -40,10 +49,10 @@ export default function TablaDomicilios(props) {
                                     </button>
                                 </Link>
                                 <button
+                                    id="botonCerrarEstado"
                                     type="button"
                                     className="btn btn-primary"
-                                    onClick={(e) => props.cerrar(d)}
-                                    disabled
+                                    onClick={(e) => props.cambiarEstado(d.id, d)}
                                 >
                                     Cerrar
                                 </button>

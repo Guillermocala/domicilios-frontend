@@ -19,7 +19,7 @@ const ManejadorDomicilios = () => {
             .catch(e => {
                 console.log(e);
             });
-    }
+    };
 
     const eliminarDomicilio = (id) => {
         DomiciliosServices.remove(id)
@@ -37,6 +37,27 @@ const ManejadorDomicilios = () => {
             });
     };
 
+    const estadoDomicilio = (estado) => {
+        return (
+            estado ? (
+                <div className="fw-bold bg-primary">Pendiente</div>
+            ) : (
+                <div className="fw-bold bg-secondary">Entregado</div>
+            )
+        )
+    };
+
+    const cambiarEstado = (id, domicilio) => {
+        DomiciliosServices.update(id, { ...domicilio, estado: false, horaDestinatario: "24:00" })
+            .then(response => {
+                if (response.status === 200) {
+                    window.alert("Domicilio cerrado!");
+                }
+            }).catch(e => {
+                console.log(e);
+            })
+    };
+
     return (
         <div>
             <div>
@@ -51,7 +72,9 @@ const ManejadorDomicilios = () => {
                 <h2>Domicilios solicitados</h2>
                 <TablaDomicilios
                     domicilios={estadoListaDomicilios}
+                    estado={estadoDomicilio}
                     eliminar={eliminarDomicilio}
+                    cambiarEstado={cambiarEstado}
                 />
             </div>
         </div>

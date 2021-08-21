@@ -79,11 +79,13 @@ const AgregarDomicilio = () => {
                     !estadoFormDomicilio.nombreDestinatario ||
                     !estadoFormDomicilio.dirDestinatario ||
                     !estadoFormDomicilio.celDestinatario ||
-                    !estadoFormDomicilio.descripcionPaquete
+                    !estadoFormDomicilio.descripcionPaquete ||
+                    !estadoFormDomicilio.mensajero
                 ) {
                     window.alert("error en formulario, algun campo vacío");
                     return;
                 }
+                console.log("mensajero: " + estadoFormDomicilio.mensajero);
                 agregarDomicilio(estadoFormDomicilio.mensajero, estadoFormDomicilio);
                 setEstadoFormDomicilio(estadoInicialForm);
             }}
