@@ -27,7 +27,7 @@ export default function TablaMensajeros(props) {
                             <td>{m.direccion}</td>
                             <td>
                                 <Link
-                                    to={`/mensajeros/editmensajero/${m.id}`}
+                                    to={"/mensajeros/editmensajero/" + m.id}
                                     title="editar"
                                 >
                                     <button

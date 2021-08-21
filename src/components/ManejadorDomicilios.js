@@ -41,7 +41,7 @@ const ManejadorDomicilios = () => {
         <div>
             <div>
                 <Link
-                    to={"/domicilios/adddomicilio"}
+                    to={"/domicilios/adddomicilio/:id"}
                     title="creardomicilio"
                 >
                     <button className="btn btn-primary">Crear domicilio</button>

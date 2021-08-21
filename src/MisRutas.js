@@ -16,7 +16,7 @@ export default function MisRutas() {
             <Route path="/micuenta" component={MiCuenta} />
             
             <Route exact path="/mensajeros" component={Mensajeros} />
-            <Route path="/mensajeros/addmensajero" component={AddMensajero} />
+            <Route path="/mensajeros/addmensajero/:idDomicilio" component={AddMensajero} />
             <Route path="/mensajeros/editmensajero/:idMensajero" component={EditMensajero}/>
 
             <Route exact path="/domicilios" component={Domicilios} />

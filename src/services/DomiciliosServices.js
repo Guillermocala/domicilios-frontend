@@ -5,19 +5,19 @@ const getAll = () => {
 };
 
 const get = (id) => {
-  return http.get(`/domicilios/${id}`);
+  return http.get("/domicilios/" + id);
 };
 
-const create = (data) => {
-  return http.post("/domicilios", data);
+const create = (id, data) => {
+  return http.post("/domicilios/adddomicilio/" + id , data);
 };
 
 const update = (id, data) => {
-  return http.put(`/domicilios/${id}`, data);
+  return http.put("/domicilios/editdomicilio/" + id, data);
 };
-//no eliminamos, pero la dejamos por si acaso
-const remove = id => {
-  return http.delete(`/domicilios/${id}`);
+
+const remove = (id) => {
+  return http.delete("/domicilios/" + id);
 };
 
 export default {

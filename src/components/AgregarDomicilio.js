@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import DomiciliosServices from "../services/DomiciliosServices";
 import { Link } from "react-router-dom";
 import MensajerosServices from "../services/MensajerosServices";
+import { DomiciliosContext } from "../context/DomiciliosContext";
 
 const AgregarDomicilio = () => {
+    const { addDomicilio } = useContext(DomiciliosContext)
     const estadoInicialListaMensajeros = [];
     const [estadoListaMensajeros, setEstadoListaMensajeros] = useState(estadoInicialListaMensajeros);
     useEffect(() => {
@@ -58,9 +60,10 @@ const AgregarDomicilio = () => {
         });
     };
 
-    const agregarDomicilio = (domicilio) => {
-        DomiciliosServices.create(domicilio)
+    const agregarDomicilio = (id, domicilio) => {
+        DomiciliosServices.create(id, domicilio)
             .then(response => {
+                addDomicilio(response.data);
                 window.alert("Domicilio creado!");
                 console.log("response: ");
                 console.log(response.data)
@@ -86,9 +89,9 @@ const AgregarDomicilio = () => {
                     window.alert("error en formulario, algun campo vacío");
                     return;
                 }
-                console.log("estado form: ");
-                console.log(estadoFormDomicilio);
-                agregarDomicilio(estadoFormDomicilio);
+                console.log("estado form: " + estadoFormDomicilio);
+                console.log("id mensajero: " + estadoFormDomicilio.mensajero.id);
+                agregarDomicilio(estadoFormDomicilio.mensajero, estadoFormDomicilio);
                 setEstadoFormDomicilio(estadoInicialForm);
             }}
         >

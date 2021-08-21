@@ -40,7 +40,7 @@ const ManejadorMensajeros = () => {
         <div>
             <div>
                 <Link
-                    to={"/mensajeros/addmensajero"}
+                    to={"/mensajeros/addmensajero/:idDomicilio"}
                     title="crearmensajero"
                 >
                     <button className="btn btn-primary">Crear mensajero</button>
