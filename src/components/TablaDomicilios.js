@@ -1,12 +1,31 @@
 import React, { useState } from "react";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import ModalDetalles from "./ModalDetalles";
 
 export default function TablaDomicilios(props) {
     const [mostrarModal, setMostrarModal] = useState(false);
     const closeModal = () => setMostrarModal(false);
-    const openModal = () => setMostrarModal(true);
-
+    
+    const estadoDetalles = {
+        id: null,
+        nombreSolicitante: "",
+        dirSolicitante: "",
+        celSolicitante: "",
+        horaSolicitante: "",
+        nombreDestinatario: "",
+        dirDestinatario: "",
+        celDestinatario: "",
+        horaDestinatario: "",
+        descripcionPaquete: "",
+        mensajero: null,
+        estado: true
+    }
+    const [detalleDomi, setDetalleDomi] = useState(estadoDetalles)
+    const openModal = (mensajero) =>{
+        setMostrarModal(true);
+        setDetalleDomi(mensajero);
+    } 
     return (
         <table>
             <thead>
@@ -28,7 +47,7 @@ export default function TablaDomicilios(props) {
                                 <button
                                     type="button"
                                     className="btn btn-primary"
-                                    onClick={openModal}
+                                    onClick={(event) => openModal(d) }
                                 >
                                     Detalles
                                 </button>
@@ -70,13 +89,10 @@ export default function TablaDomicilios(props) {
                                 >
                                     Eliminar
                                 </button>
-                                <ModalDetalles
-                                    show={mostrarModal}
-                                    closeModal={closeModal}
-                                    domicilio={d}
-                                />
+                                
                             </td>
                         </tr>
+                        
                     ))
                 ) : (
                     <tr>
@@ -84,6 +100,13 @@ export default function TablaDomicilios(props) {
                     </tr>
                 )}
             </tbody>
+            <>
+                <ModalDetalles
+                    show={mostrarModal}
+                    closeModal={closeModal}
+                    domicilio={detalleDomi}
+                />
+            </>
         </table>
     );
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import DomiciliosServices from "../services/DomiciliosServices";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import MensajerosServices from "../services/MensajerosServices";
 
 const AgregarDomicilio = () => {
+    let history = useHistory();
     const estadoInicialListaMensajeros = [];
     const [estadoListaMensajeros, setEstadoListaMensajeros] = useState(estadoInicialListaMensajeros);
     useEffect(() => {
@@ -60,7 +61,7 @@ const AgregarDomicilio = () => {
     const agregarDomicilio = (id, domicilio) => {
         DomiciliosServices.create(id, domicilio)
             .then(response => {
-                window.alert("Domicilio creado!");
+                history.push("/domicilios")
                 console.log(response.data)
             })
             .catch(e => {
@@ -191,6 +192,13 @@ const AgregarDomicilio = () => {
                     value={estadoFormDomicilio.mensajero}
                     onChange={gestionCamposForm}
                 >
+                   <option
+                            id="mensajeroOption"
+                            name="mensajeroOption"
+                            value={-1}
+                        >
+                            Selecciona un mensajero
+                    </option>
                     {estadoListaMensajeros.map((m) => (
                         <option
                             id="mensajeroOption"
