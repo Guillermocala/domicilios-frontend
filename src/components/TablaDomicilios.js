@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ModalDetalles from "../components/Modal";
+import ModalDetalles from "./ModalDetalles";
 
 export default function TablaDomicilios(props) {
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -25,11 +25,6 @@ export default function TablaDomicilios(props) {
                             <td>{d.nombreSolicitante}</td>
                             <td>{props.estado(d.estado)}</td>
                             <td>
-                                <ModalDetalles
-                                    show={mostrarModal}
-                                    closeModal={closeModal}
-                                    domicilio={d}
-                                />
                                 <button
                                     type="button"
                                     className="btn btn-primary"
@@ -48,14 +43,26 @@ export default function TablaDomicilios(props) {
                                         Editar
                                     </button>
                                 </Link>
-                                <button
-                                    id="botonCerrarEstado"
-                                    type="button"
-                                    className="btn btn-primary"
-                                    onClick={(e) => props.cambiarEstado(d.id, d)}
-                                >
-                                    Cerrar
-                                </button>
+                                {d.estado ? (
+                                    <button
+                                        id="botonCerrarEstado"
+                                        type="button"
+                                        className="btn btn-primary"
+                                        onClick={(e) => props.cambiarEstado(d.id, d)}
+                                    >
+                                        Cerrar
+                                    </button>
+                                ) : (
+                                    <button
+                                        id="botonCerrarEstado"
+                                        type="button"
+                                        className="btn btn-primary"
+                                        onClick={(e) => props.cambiarEstado(d.id, d)}
+                                        disabled
+                                    >
+                                        Cerrar
+                                    </button>
+                                )}
                                 <button
                                     type="button"
                                     className="btn btn-danger"
@@ -63,6 +70,11 @@ export default function TablaDomicilios(props) {
                                 >
                                     Eliminar
                                 </button>
+                                <ModalDetalles
+                                    show={mostrarModal}
+                                    closeModal={closeModal}
+                                    domicilio={d}
+                                />
                             </td>
                         </tr>
                     ))
