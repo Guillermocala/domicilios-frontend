@@ -48,17 +48,17 @@ const ManejadorDomicilios = () => {
     };
 
     const cambiarEstado = (id, domicilio) => {
-        DomiciliosServices.update(id, { ...domicilio, estado: false, horaDestinatario: "24:00" })
+        DomiciliosServices.update(id, { ...domicilio, })
             .then(response => {
                 if (response.status === 200) {
-                    const listaActualizada = estadoListaDomicilios.map(d => {
-                        if(d.id === id){
-                            d.estado=false;                            
+                    const listaActualizada = estadoListaDomicilios.map((d) => {
+                        if (d.id === id) {
+                            d.estado = false;
+                            d.horaDestinatario = "24:00";
                         }
                         return d;
                     })
                     setEstadoListaDomicilios = listaActualizada;
-                    //window.alert("Domicilio cerrado!");
                 }
             }).catch(e => {
                 console.log(e);

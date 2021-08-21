@@ -21,10 +21,10 @@ export default function TablaDomicilios(props) {
         mensajero: null,
         estado: true
     }
-    const [detalleDomi, setDetalleDomi] = useState(estadoDetalles)
+    const [detalleDomicilio, setDetalleDomicilio] = useState(estadoDetalles)
     const openModal = (mensajero) =>{
         setMostrarModal(true);
-        setDetalleDomi(mensajero);
+        setDetalleDomicilio(mensajero);
     } 
     return (
         <table>
@@ -104,7 +104,7 @@ export default function TablaDomicilios(props) {
                 <ModalDetalles
                     show={mostrarModal}
                     closeModal={closeModal}
-                    domicilio={detalleDomi}
+                    domicilio={detalleDomicilio}
                 />
             </>
         </table>
